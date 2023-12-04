@@ -1,0 +1,77 @@
+namespace  Polymorphism
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Circle c1 = new Circle("Перше коло ", 14);
+            Circle c2 = new Circle("Друге коло ", 31);
+            Square s1 = new Square("Перший квадрат ", 6);
+            Square s2 = new Square("Другий квадрат ", 11);
+            Console.WriteLine($"{c1.Name} - отже, площа першого кола = {c1.Area()}, а периметр буде = {c1.Perimeter()}");
+            Console.WriteLine($"{c2.Name} - площа другого кола = {c2.Area()}, а периметр буде = {c2.Perimeter()}");
+            Console.WriteLine($"{s1.Name} - отже, площа першого квадрату = {s1.Area()}, а периметр = {s1.Perimeter()}");
+            Console.WriteLine($"{s2.Name} - площа другого квадрату = {s2.Area()}, а периметр = {s2.Perimeter()}");
+            double maxC = Math.Max(c1.Area(), c2.Area());
+            double maxS = Math.Max(s1.Area(), s2.Area());
+            Console.WriteLine($"Тому площа найбільшого кола буде дорівнювати {maxC}");
+            Console.WriteLine($"Тому площа найбільшого квадрату буде дорівнювати {maxS}");
+        }
+    }
+    abstract class Shape
+    {
+        public string name;
+        public string Name
+        {
+            get { return name; }
+        }
+        public Shape(string name)
+        {
+            this.name = name;
+        }
+        public abstract double Area();
+        public abstract double Perimeter();
+    }
+    class Circle : Shape
+    {
+        private double radius;
+        public double Radius
+        {
+            get { return radius; }
+            set { radius = value; }
+        }
+        public Circle(string name, double radius) : base(name)
+        {
+            Radius = radius;
+        }
+        public override double Area()
+        {
+            return Math.PI * Math.Pow(Radius, 2);
+        }
+        public override double Perimeter()
+        {
+            return 2 * Math.PI * Radius;
+        }
+    }
+    class Square : Shape
+    {
+        private double side;
+        public double Side
+        {
+            get { return side; }
+            set { side = value; }
+        }
+        public Square(string name, double side) : base(name)
+        {
+            Side = side;
+        }
+        public override double Area()
+        {
+            return Math.Pow(Side, 2);
+        }
+        public override double Perimeter()
+        {
+            return 4 * Side;
+        }
+    }
+}
